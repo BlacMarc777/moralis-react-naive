@@ -7,17 +7,20 @@ function MoralisDappProvider({children}) {
   const [walletAddress, setWalletAddress] = useState();
   const [chainId, setChainId] = useState();
   useEffect(() => {
-    Moralis.onChainChanged(function (chain) {
-      setChainId(chain);
-    });
-
-    Moralis.onAccountChanged(function (address) {
-      setWalletAddress(address[0]);
-    });
+    // chain &&
+    //   Moralis.onChainChanged(function (chain) {
+    //     setChainId(chain);
+    //   });
+    // address &&
+    //   Moralis.onAccountChanged(function (address) {
+    //     setWalletAddress(address[0]);
+    //   });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  useEffect(() => setChainId(web3.givenProvider?.chainId));
+  useEffect(() => {
+    setChainId(web3.givenProvider?.chainId);
+  }, []);
   useMemo(
     () =>
       setWalletAddress(
@@ -37,7 +40,7 @@ function MoralisDappProvider({children}) {
     // </MoralisDappContext.Provider>
 
     //USE THIS DURING PRODUCTION
-    <MoralisDappContext.Provider value={{walletAddress, chainId: '0x1'}}>
+    <MoralisDappContext.Provider value={{walletAddress, chainId: '0x56'}}>
       {children}
     </MoralisDappContext.Provider>
   );
